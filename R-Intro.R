@@ -10,7 +10,9 @@ setwd("~/Desktop/R-Dateien zur Vorlesung-20230109")
 # und speichern Sie ihn unter dem Namen alk
 #####
 
+# Anstatt von <- kann auch = verwendet werden
 alk <- read.csv2("files/Alkoholkonsum.csv")
+head(alk)
 
 #####
 # Verschaffen Sie sich über die summary()-Funktion einen Überblick über den Datensatz
@@ -24,11 +26,18 @@ summary(alk)
 
 dim(alk)
 
+# Andere Möglichkeiten für Informationen zum Datensatz:
+nrow(alk)
+ncol(alk)
+str(alk)
+
 ####
 # Erstellen Sie mit der plot()-Funktion ein Streudiagramm für die beiden Variablen
 # Wine und Heart Death Rate
 ####
 
+# Durch attach muss nicht mehr immer alk angegeben werden
+attach(alk)
 plot(alk$Wine, alk$Heart.death.rate)
 
 ####
@@ -37,7 +46,8 @@ plot(alk$Wine, alk$Heart.death.rate)
 ####
 
 # Plottet alle Möglichkeiten, deshalb nur die Range der Spalten angeben (hier der gesamte Datensatz -1, da Country rausgelassen werden soll
-pairs(alk[-1])
+# Eckige Klammern auf einzelne Datensätze mit [Zeilen, Spalte] hinzufügen
+pairs(alk[,-1])
 
 # Alternativ Spalten einzeln angeben:
 #pairs(~alk$Heart.death.rate + alk$Liquor + alk$Wine + alk$Beer, data = alk)
