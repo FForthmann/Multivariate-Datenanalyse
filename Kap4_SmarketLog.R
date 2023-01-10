@@ -11,7 +11,8 @@ dim(Smarket)
 summary(Smarket)
 pairs(Smarket)
 ### Erster Eindruck: Welche Variablen korrelieren mit `Today`?
-cor(Smarket) > 0.1
+# cor(Smarket) > 0.1
+# Letzte Variable (nicht numerisch) rausschmeißen (dann verschwindet der Fehler)
 cor(Smarket[, -9])
 ### Logistische Regression: glm mit Argument "family = binomial"
 ### Die Koffizienten werden mittels Maximum-Likelihood-Methode berechnet
@@ -23,7 +24,9 @@ summary(glm.fits)
 glm.probs <- predict(glm.fits, type = "response")
 ### Konvertiere Wahrscheinlichkeiten in Klassen (Up / Down)
 n <- nrow(Smarket)
+# Alle Einträge mit "Down markieren"
 glm.pred <- rep("Down", n)
+# Bei Angelegtem Vektor an Positionen mit Wert > 0.5, "Down" mit "Up" beschreiben
 glm.pred[glm.probs > 0.5] = "Up"
 ### Wahrheitsmatrix (Konfusionsmatrix) erstellen
 x <- table(glm.pred, Direction)
