@@ -20,17 +20,19 @@ Y = beta0 + beta1 * X + beta2 * X^2 + beta3 * X^3 + eps
 
 library(leaps)
 data.full = data.frame(y = Y, x = X)
+# Polynomgrad = 10
 mod.full = regsubsets(y~poly(x, 10, raw = T), data=data.full, nvmax=10)
 mod.summary = summary(mod.full)
 mod.summary
 
+# Besten Wert des jeweiligen Bestimmtheitsmaßes bestimmen
 which.min(mod.summary$cp)
 which.min(mod.summary$bic)
 which.max(mod.summary$adjr2)
 
-# Plotten
+# Plotten mit Punkten von oben
 plot(mod.summary$cp, xlab="Anzahl Prädiktoren", ylab="Cp", pch=20, type="l")
-points(4, mod.summary$cp[3], pch=4, col="red", lwd=2)
+points(4, mod.summary$cp[4], pch=4, col="red", lwd=2)
 plot(mod.summary$bic, xlab="Anzahl Prädiktoren", ylab="BIC", pch=20, type="l")
 points(3, mod.summary$bic[3], pch=4, col="red", lwd=2)
 plot(mod.summary$adjr2, xlab="Anzahl Prädiktoren", ylab="Adj. R2", pch=20, type="l")
