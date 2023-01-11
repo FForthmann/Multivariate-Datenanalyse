@@ -8,7 +8,8 @@ library(ISLR2)
 ### Datensatz Hitters
 ### Ziel: Gehalt von Baseballspielern vorhersagen
 ?Hitters
-View(Hitters)
+# View ist auskommentiert, weil dafür das Package CLI installiert sein muss -> Fehler
+#View(Hitters)
 # Fehlende Werte
 sum(is.na(Hitters$Salary))
 Hitters <- na.omit(Hitters)
